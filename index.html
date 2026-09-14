@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Something Special ❤️</title>
 
 <style>
@@ -34,6 +34,12 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    padding:
+        max(20px, env(safe-area-inset-top))
+        max(20px, env(safe-area-inset-right))
+        max(20px, env(safe-area-inset-bottom))
+        max(20px, env(safe-area-inset-left));
 
     background:
         radial-gradient(
@@ -77,6 +83,8 @@ html, body {
         transform .25s ease,
         background .25s ease,
         box-shadow .25s ease;
+
+    -webkit-tap-highlight-color: transparent;
 }
 
 .start-button:hover {
@@ -97,6 +105,7 @@ html, body {
     position: relative;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
 
     background:
@@ -1465,6 +1474,370 @@ html, body {
             rotate(500deg);
     }
 }
+
+
+/* =========================================================
+   MOBILE PROOFING
+   Desktop remains unchanged above this point.
+========================================================= */
+
+@media (max-width: 700px) {
+
+    /* Intro */
+    .intro {
+        width: 94%;
+        font-size: clamp(14px, 4.2vw, 20px);
+        letter-spacing: 2.5px;
+        line-height: 1.5;
+    }
+
+
+    /* Keep the bulb comfortably centered */
+    .bulb {
+        width: 27px;
+        height: 39px;
+    }
+
+
+    /* Cake stays the same shape, but scales as one complete object */
+    .cake {
+        transform: translateX(-50%) scale(.82);
+        transform-origin: center bottom;
+    }
+
+    @keyframes cakeAppear {
+        from {
+            opacity: 0;
+            transform:
+                translateX(-50%)
+                translateY(25px)
+                scale(.82);
+        }
+
+        to {
+            opacity: 1;
+            transform:
+                translateX(-50%)
+                translateY(0)
+                scale(.82);
+        }
+    }
+
+
+    /* Keep candles centered over the cake */
+    .number-candles {
+        transform: translateX(-50%) scale(.82);
+        transform-origin: center bottom;
+    }
+
+
+    /* Smaller surprise banner */
+    .surprise-banner {
+        width: min(225px, 70vw);
+        height: 58px;
+    }
+
+    .surprise-banner span {
+        font-size: clamp(21px, 7vw, 29px);
+        letter-spacing: 3px;
+    }
+
+
+    /* Wish moves above the cake instead of sitting off-screen */
+    .wish-text {
+        right: auto;
+        left: 50%;
+        top: 43%;
+
+        width: min(250px, 82vw);
+
+        transform:
+            translateX(-50%)
+            translateY(-50%);
+
+        font-size: clamp(15px, 4.2vw, 19px);
+        line-height: 1.45;
+    }
+
+    @keyframes wishIn {
+        from {
+            opacity: 0;
+            transform:
+                translateX(-50%)
+                translateY(-50%)
+                translateX(-15px);
+        }
+
+        to {
+            opacity: 1;
+            transform:
+                translateX(-50%)
+                translateY(-50%)
+                translateX(0);
+        }
+    }
+
+    @keyframes wishOut {
+        from {
+            opacity: 1;
+            transform:
+                translateX(-50%)
+                translateY(-50%)
+                translateX(0);
+        }
+
+        to {
+            opacity: 0;
+            transform:
+                translateX(-50%)
+                translateY(-50%)
+                translateX(-10px);
+        }
+    }
+
+
+    /* Countdown sits comfortably above the cake */
+    .countdown {
+        top: 72%;
+        font-size: 43px;
+    }
+
+
+    /* Smoke follows the scaled candle area */
+    .smoke.one {
+        left: calc(50% - 29px);
+        bottom: calc(18% + 171px);
+    }
+
+    .smoke.two {
+        left: calc(50% + 25px);
+        bottom: calc(18% + 171px);
+    }
+
+
+    /* Final message moves above the cake */
+    .birthday-text {
+        left: 50%;
+        top: 42%;
+
+        width: min(280px, 86vw);
+
+        transform:
+            translateX(-50%)
+            translateY(-50%);
+
+        font-size: clamp(21px, 7vw, 30px);
+        line-height: 1.35;
+        letter-spacing: 1.5px;
+    }
+
+    @keyframes birthdayIn {
+        from {
+            opacity: 0;
+            transform:
+                translateX(-50%)
+                translateY(-50%)
+                translateX(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform:
+                translateX(-50%)
+                translateY(-50%)
+                translateX(0);
+        }
+    }
+
+
+    /* Keep fireworks visible without creating horizontal overflow */
+    .firework::after {
+        width: 42px;
+        height: 42px;
+    }
+
+
+    /* Mobile-friendly start button */
+    .start-button {
+        max-width: 85vw;
+        padding: 15px 25px;
+        font-size: 16px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 390px), (max-height: 700px) and (max-width: 700px) {
+
+    .intro {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    .cake {
+        transform: translateX(-50%) scale(.72);
+    }
+
+    @keyframes cakeAppear {
+        from {
+            opacity: 0;
+            transform:
+                translateX(-50%)
+                translateY(25px)
+                scale(.72);
+        }
+
+        to {
+            opacity: 1;
+            transform:
+                translateX(-50%)
+                translateY(0)
+                scale(.72);
+        }
+    }
+
+    .number-candles {
+        transform: translateX(-50%) scale(.72);
+    }
+
+    .wish-text {
+        top: 41%;
+        font-size: 14px;
+    }
+
+    .countdown {
+        top: 70%;
+        font-size: 40px;
+    }
+
+    .birthday-text {
+        top: 40%;
+        font-size: 20px;
+    }
+
+    .surprise-banner {
+        top: 18%;
+        width: 205px;
+        height: 54px;
+    }
+
+    .surprise-banner span {
+        font-size: 21px;
+        letter-spacing: 2px;
+    }
+}
+
+
+/* =========================================================
+   LANDSCAPE PHONES
+========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    .cake {
+        transform: translateX(-50%) scale(.62);
+    }
+
+    @keyframes cakeAppear {
+        from {
+            opacity: 0;
+            transform:
+                translateX(-50%)
+                translateY(25px)
+                scale(.62);
+        }
+
+        to {
+            opacity: 1;
+            transform:
+                translateX(-50%)
+                translateY(0)
+                scale(.62);
+        }
+    }
+
+    .number-candles {
+        transform: translateX(-50%) scale(.62);
+    }
+
+    .wish-text {
+        right: auto;
+        left: 7%;
+        top: 50%;
+        width: 180px;
+
+        transform: translateY(-50%);
+
+        font-size: 14px;
+    }
+
+    @keyframes wishIn {
+        from {
+            opacity: 0;
+            transform:
+                translateY(-50%)
+                translateX(-15px);
+        }
+
+        to {
+            opacity: 1;
+            transform:
+                translateY(-50%)
+                translateX(0);
+        }
+    }
+
+    @keyframes wishOut {
+        from {
+            opacity: 1;
+            transform:
+                translateY(-50%)
+                translateX(0);
+        }
+
+        to {
+            opacity: 0;
+            transform:
+                translateY(-50%)
+                translateX(-10px);
+        }
+    }
+
+    .birthday-text {
+        left: auto;
+        right: 7%;
+        top: 50%;
+        width: 200px;
+
+        transform: translateY(-50%);
+
+        font-size: 23px;
+    }
+
+    @keyframes birthdayIn {
+        from {
+            opacity: 0;
+            transform:
+                translateY(-50%)
+                translateX(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform:
+                translateY(-50%)
+                translateX(0);
+        }
+    }
+
+    .countdown {
+        top: 78%;
+    }
+}
+
 </style>
 </head>
 
@@ -1552,7 +1925,6 @@ html, body {
         <div class="drip three"></div>
 
 
-        <!-- Chocolate drizzle -->
         <div class="chocolate-drizzle">
 
             <span style="left:8px;top:5px;--rot:-18deg"></span>
@@ -1565,7 +1937,6 @@ html, body {
         </div>
 
 
-        <!-- Small cream dots -->
         <div class="cream-dots">
 
             <span class="cream-dot" style="left:8px;top:4px"></span>
@@ -1577,7 +1948,6 @@ html, body {
         </div>
 
 
-        <!-- Red berries -->
         <div class="cake-berries">
 
             <span class="berry" style="left:22px;top:7px"></span>
@@ -1589,7 +1959,6 @@ html, body {
         </div>
 
 
-        <!-- Gold sprinkles -->
         <div class="gold-sprinkles">
 
             <span class="gold-sprinkle" style="left:18px;top:7px;--rot:25deg"></span>
@@ -1605,7 +1974,6 @@ html, body {
         </div>
 
 
-        <!-- 19 candles -->
         <div class="number-candles">
 
             <div class="number-candle number-one">
@@ -1621,7 +1989,6 @@ html, body {
         </div>
 
 
-        <!-- Cake stripe -->
         <div class="cake-decoration"></div>
 
     </div>
@@ -1781,12 +2148,6 @@ startButton.addEventListener("click", () => {
 
     started = true;
 
-    /*
-        Remove the waiting state.
-        This starts all CSS animations from
-        their original timeline.
-    */
-
     scene.classList.remove("waiting");
 
     startScreen.classList.add("hidden");
@@ -1796,55 +2157,34 @@ startButton.addEventListener("click", () => {
        AUDIO TIMELINE
     ========================= */
 
-    /*
-        The sounds are synchronized with
-        the existing CSS animation timings.
-    */
-
-
-    // Bulb falls
     setTimeout(() => {
         playSound(sounds.bulb);
     }, 5950);
 
-
-    // Room begins glowing
     setTimeout(() => {
         playSound(sounds.reveal);
     }, 6150);
 
-
-    // SURPRISE
     setTimeout(() => {
         playSound(sounds.surprise);
     }, 11000);
 
-
-    // First candle lights — 1
     setTimeout(() => {
         playSound(sounds.candle);
     }, 15800);
 
-
-    // Second candle lights — 9
     setTimeout(() => {
         playSound(sounds.candle);
     }, 16050);
 
-
-    // 9 blows out first
     setTimeout(() => {
         playSound(sounds.blow);
     }, 21800);
 
-
-    // 1 blows out second
     setTimeout(() => {
         playSound(sounds.blow);
     }, 22100);
 
-
-    // Small applause after both candles are out
     setTimeout(() => {
         playSound(sounds.applause);
     }, 22380);
